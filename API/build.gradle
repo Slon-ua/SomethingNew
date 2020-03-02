@@ -1,0 +1,74 @@
+plugins {
+    id 'io.franzbecker.gradle-lombok' version '3.3.0'  // библиотека ' lombok ' для работы с JSON
+    id 'java'
+    id "io.qameta.allure" version "2.8.0"  // подключаем плагин Allure
+}
+
+group 'LESSON_2'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    compile group: 'io.rest-assured', name: 'rest-assured', version: '4.2.0'  // библиотека ' rest-assured ' для оаботы с API
+
+    compile group: 'org.slf4j', name:'slf4j-api', version: '1.7.25'   // библиотека ' slf4j ' для того чтоб сделать красивые и самописные логи
+    compile group: 'ch.qos.logback', name:'logback-classic', version: '1.2.3'
+    compile group: 'ch.qos.logback', name:'logback-core', version: '1.2.3'
+
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'   // библиотека junit5
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
+
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.10.2'  // библиотека ' jackson ' для работы с JSON
+
+    testCompile 'org.assertj:assertj-core:3.12.2'   // библиотека  AssertJ  для работы с текстом, пишет асершены
+
+    compile group: 'org.aeonbits.owner', name: 'owner', version: '1.0.10'  // подключаем библиотеку JAVA OWNER для работы с пропертями
+
+    compile "io.qameta.allure:allure-rest-assured:2.10.0"
+}
+
+test {
+    useJUnitPlatform{
+        excludeTags 'integration'
+    }
+
+
+    systemProperties System.getProperties()   //проброс комант, присвоение переменных из консоли в Гредел
+
+    testLogging {
+        //    showStandardStreams = true //для отражения ответа РЕСТ-ашурда
+        events "PASSED", "FAILED", "SKIPPED"
+        exceptionFormat = 'full'  //более полный лог об ошибке
+    }
+
+    test.outputs.upToDateWhen {false} //строчка отвечает за то, что код будет запускатся всегда, даже при успешном прохождении. Тут же настраивается частота проведения тестов
+}
+
+
+//  Filtering by Tags gradle
+//  https://stackoverflow.com/questions/40891867/junit5-tag-specific-gradle-task?answertab=votes#tab-top
+//
+//  task integrationTest(type: Test) {
+//    useJUnitPlatform {
+//        includeTags 'integration'
+//    }
+//    check.dependsOn it
+//    shouldRunAfter test
+//  }
+
+allure {
+    version = '2.5.0'
+    aspectjweaver = true
+    autoconfigure = true
+    configuration = 'compile'  // указывает чтоб аллюр отрабатывал на уровне всего проекта
+    useJUnit5{
+        version = '2.10.0'
+    }
+}

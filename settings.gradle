@@ -1,0 +1,4 @@
+rootProject.name = 'Selenide_S.Perogov'
+include 'API'
+include 'UI'
+
