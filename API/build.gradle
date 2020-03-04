@@ -27,7 +27,7 @@ dependencies {
 
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.10.2'  // библиотека ' jackson ' для работы с JSON
 
-    testCompile 'org.assertj:assertj-core:3.12.2'   // библиотека  AssertJ  для работы с текстом, пишет асершены
+    testCompile 'org.assertj:assertj-core:3.15.0'   // библиотека  AssertJ  для работы с текстом, пишет асершены
 
     compile group: 'org.aeonbits.owner', name: 'owner', version: '1.0.10'  // подключаем библиотеку JAVA OWNER для работы с пропертями
 

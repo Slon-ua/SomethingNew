@@ -1,33 +1,37 @@
 package com.socks.api.tests;
 
+import com.socks.api.conditions.Conditions;
 import com.socks.api.payload.UserPayload;
-import io.restassured.RestAssured;
-import io.restassured.filter.log.RequestLoggingFilter;
-import io.restassured.filter.log.ResponseLoggingFilter;
-import io.restassured.http.ContentType;
-import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
+import com.socks.api.responses.UserRegistrationResponce;
+import com.socks.api.services.UserApiService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.junit.jupiter.api.BeforeAll;
+import org.assertj.core.api.BDDAssertions;
 import org.junit.jupiter.api.Test;
 
-import static org.hamcrest.Matchers.*;
+import java.util.Map;
 
-public class UserRegistrationTest {
+import static org.hamcrest.Matchers.isEmptyString;
+import static org.hamcrest.Matchers.not;
 
-    @BeforeAll
-    static void setUp(){
-        RestAssured.baseURI="http://192.168.99.101";
-    }
+@Slf4j
+public class UserRegistrationTest extends BaseTest{
+
+    private final UserApiService userApiService = new UserApiService();  //final - переменная закрыта на изменение
+
+//    @BeforeAll
+//    static void setUp() {
+//        RestAssured.baseURI = "http://192.168.99.101";
+//    }
 
     @Test
     void testCanRegisterNewUserWithValidCredentials() {
 
         //given  -  не обязательный параметр, пишется для читабельности кода, за что отвечает этот кусок
-       UserPayload userPayload = new UserPayload()
-               .username("USER-"+RandomStringUtils.randomNumeric(5))
-               .password("12345")
-               .email("usik@test.com");
+        UserPayload userPayload = new UserPayload()
+                .username("USER-" + RandomStringUtils.randomNumeric(5))
+                .password("12345")
+                .email("usik@test.com");
 
        /*
         UserPayload userPayload = new UserPayload();
@@ -54,35 +58,65 @@ public class UserRegistrationTest {
                 .statusCode(200);
        */
 
-       //expect
-       registrNewUser(userPayload)
-               .then()//.log().all()
-               .body("id", not(isEmptyString()))
-               .statusCode(200);
+        //expect
+        UserRegistrationResponce pojo = userApiService.registerNewUser(userPayload)
+                .shouldHave(Conditions.statusCode(200))
+                .shouldHave(Conditions.bodyField("id", not(isEmptyString())))
+        //        .getValueLikeString("id")
+                .asPojo(UserRegistrationResponce.class)  //Работает через pojo, только нужно будет поменять тип данных
+                ;
+
+          BDDAssertions.then(pojo.getId()).isNotEmpty();
+      //  assertThat(pojo.getId()).isNotEmpty();
+
+          log.info("All JSON use jsonPath ===1===> "+pojo);
+          log.info("All JSON use assertThat ===2===> "+pojo.getId());
+        //  log.info("All JSON ======> "+pojo.getId().length());
+
+
+//               .then()//.log().all()
+//               .body("id", not(isEmptyString()))
+//               .statusCode(200);
     }
 
     @Test
     void testCanNotCreateSameUserTwice() {
         //given
         UserPayload userPayload = new UserPayload()
-                .username("USER-"+RandomStringUtils.randomNumeric(5))
+                .username("USER-" + RandomStringUtils.randomNumeric(5))
                 .password("12345")
                 .email("usik@test.com");
 
         //when
-        registrNewUser(userPayload)
-                .then()//.log().all()
-                .body("id", not(isEmptyString()))
-                .statusCode(200);
+        Map<String, String> cookies = userApiService.registerNewUser(userPayload)
+                .shouldHave(Conditions.statusCode(200))
+                .shouldHave(Conditions.bodyField("id", not(isEmptyString())))
+                .getAllCookies("");
+
+        log.info("All COOKIAS ======> "+cookies);
 
         //then
-        registrNewUser(userPayload)
-                .then()//.log().all()
-                .statusCode(500);
+        log.info("#3 Check thet we can't create new user");
+        String cookiByName = userApiService.registerNewUser(userPayload)
+                .shouldHave(Conditions.statusCode(500))
+                .getCookiesByName("", "md.sid");
+
+        log.info("cookiByName \"md.sid\" ======> "+cookiByName);
+
+//        //when
+//        userApiService.registerNewUser(userPayload)
+//                .then()//.log().all()
+//                .body("id", not(isEmptyString()))
+//                .statusCode(200);
+//
+//        //then
+//        userApiService.registerNewUser(userPayload)
+//                .then()//.log().all()
+//                .statusCode(500);
     }
 
 
-
+/*
     private RequestSpecification setup(){
         return RestAssured
                 .given()
@@ -92,11 +126,11 @@ public class UserRegistrationTest {
                 ;
     }
 
-    private Response registrNewUser(UserPayload userPayload){
+    private Response registerNewUser(UserPayload userPayload){
         return setup()
                 .body(userPayload)
                 .when()
                 .post("/register");
     }
-
+*/
 }
