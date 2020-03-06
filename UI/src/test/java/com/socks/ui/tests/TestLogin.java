@@ -58,7 +58,7 @@ public class TestLogin extends BaseUITest {
 
 
 
-        //      log.info("----3---");
+              log.info("----3---");
 
         $("#tabCatalogue").waitUntil(Condition.text("Catalogue "), 10000); // ожидает элемент 10 секунд, если появится раньше, о не будет выжидать все 10сек
 
