@@ -3,3 +3,6 @@
 out/
 build/
 .allure/
+API/allure-results/
+UI/allure-results/
+common/allure-results/

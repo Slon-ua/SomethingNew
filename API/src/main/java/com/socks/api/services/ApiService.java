@@ -1,6 +1,9 @@
 package com.socks.api.services;
 
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.RestAssured;
+import io.restassured.filter.log.RequestLoggingFilter;
+import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.http.ContentType;
 import io.restassured.parsing.Parser;
 import io.restassured.specification.RequestSpecification;
@@ -21,7 +24,8 @@ public class ApiService {
                 .contentType(ContentType.JSON)
                 .accept(ContentType.JSON)
                 .cookie(userTokenOrCookies)
-                // .filters(new RequestLoggingFilter(), new ResponseLoggingFilter())
+    //            .filters(new RequestLoggingFilter(), new ResponseLoggingFilter())  //при этих логах получаю ошибку
+                .filters(new AllureRestAssured())
                 ;
     }
 
