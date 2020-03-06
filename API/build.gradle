@@ -1,13 +1,13 @@
-plugins {
-    id 'io.franzbecker.gradle-lombok' version '3.3.0'  // библиотека ' lombok ' для работы с JSON
-    id 'java'
-    id "io.qameta.allure" version "2.8.0"  // подключаем плагин Allure
-}
-
-group 'LESSON_2'
-version '1.0-SNAPSHOT'
-
-sourceCompatibility = 1.8
+//plugins {
+//    id 'io.franzbecker.gradle-lombok' version '3.3.0'  // библиотека ' lombok ' для работы с JSON
+//    id 'java'
+//    id "io.qameta.allure" version "2.8.0"  // подключаем плагин Allure
+//}
+//
+//group 'LESSON_2'
+//version '1.0-SNAPSHOT'
+//
+//sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()

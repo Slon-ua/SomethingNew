@@ -1,0 +1,9 @@
+//dependencies {
+//    compile project(":API")
+////    compile project(":UI")
+//
+//    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'   // библиотека junit5
+//    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
+//    compile group: 'com.codeborne', name: 'selenide', version: '4.14.2'
+//    compile group: 'io.rest-assured', name: 'rest-assured', version: '4.2.0'  // библиотека ' rest-assured ' для оаботы с API
+//}

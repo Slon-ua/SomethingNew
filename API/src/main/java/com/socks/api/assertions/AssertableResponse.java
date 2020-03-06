@@ -3,6 +3,8 @@ package com.socks.api.assertions;
 
 import com.socks.api.conditions.Condition;
 import io.qameta.allure.Step;
+import io.restassured.RestAssured;
+import io.restassured.parsing.Parser;
 import io.restassured.response.Response;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +26,7 @@ public class AssertableResponse {
 
     public AssertableResponse shouldHave(Condition condition) {  //метод проверки соответствия элемента респонса ожидаемым значениям
         log.info("About to check condition [ {} ]", condition);  // первая часть лога проверки, в скобках 2я часть лога из конкретных классов 'conditions'
+        RestAssured.registerParser("text/plain", Parser.JSON);
 
         condition.check(response);  //передает через интерфейс методу condition.check  переменную, которую получил из файла ApiService (респонс от РЕСТ_ашурда) при обращении к этому методу - AssertableResponse
         return this;  // означает вернить сам себя, инстанс этого же обьекта
