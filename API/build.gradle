@@ -69,6 +69,6 @@ allure {
     autoconfigure = true
     configuration = 'compile'  // указывает чтоб аллюр отрабатывал на уровне всего проекта
     useJUnit5{
-        version = '2.10.0'
+        version = '2.12.0'
     }
 }

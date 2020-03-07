@@ -3,6 +3,7 @@ package com.socks.api.tests;
 import io.restassured.RestAssured;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 
 @RequiredArgsConstructor
 
@@ -44,5 +45,7 @@ public class BaseAPITest {
            RestAssured.baseURI = config.host();  //вызов конкретной проперти
 */
 
+
     }
+
 }
