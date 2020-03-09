@@ -28,7 +28,7 @@ node {
             jdk              : '',
             properties       : [],
             reportBuildPolicy: 'ALWAYS',
-            results          : [[path: 'API/build/allure-results']], [[path: 'UI/build/allure-results']]
+            results          : [[path: 'API/build/allure-results'],[path: 'UI/build/allure-results']]
         ])
     }
 }
