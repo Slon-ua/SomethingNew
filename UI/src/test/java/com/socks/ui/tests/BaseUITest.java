@@ -22,7 +22,7 @@ public class BaseUITest {
         Configuration.baseUrl = System.getProperty("host","http://192.168.99.101");
         Configuration.browserSize = "1366x768";
         Configuration.timeout=4000;
-   //     Configuration.browser = "Chrome";
+        Configuration.browser = "chrome";
 
    //     Configuration.browser= "com.socks.pages.ui.MyCustomDriver";
    //     SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(false));
@@ -39,6 +39,8 @@ public class BaseUITest {
         ProjectConfig config = ConfigFactory.create(ProjectConfig.class, myVars);  // вызов пропертей енвайрмента и его переменных (env.host)
           RestAssured.baseURI = config.host();  //вызов конкретной проперти
 */
+
+        Configuration.remote =  "http://192.168.99.109:4444/wd/hub";
 
     }
 
