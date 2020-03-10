@@ -22,7 +22,7 @@ node {
         sh "./gradlew clean UI:test"
     }
 
- 
+/* 
              allure([
                 includeProperties: false,
                 jdk              : '',
@@ -30,7 +30,8 @@ node {
                 reportBuildPolicy: 'ALWAYS',
                 results          : [[path: 'API/build/allure-results'],[path: 'UI/build/allure-results']]
             ])
- 
+ */
+    allure includeProperties: false, jdk: '', results: [[path: 'UI/build/allure-results'], [path: 'API/build/allure-results']]
 }
 
 
