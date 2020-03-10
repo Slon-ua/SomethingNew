@@ -23,12 +23,18 @@ node {
     }
 
     stage('Publish tests results') {
-        allure([
-            includeProperties: false,
-            jdk              : '',
-            properties       : [],
-            reportBuildPolicy: 'ALWAYS',
-            results          : [[path: 'API/build/allure-results'],[path: 'UI/build/allure-results']]
-        ])
+        steps{
+          script{
+             allure([
+                includeProperties: false,
+                jdk              : '',
+                properties       : [],
+                reportBuildPolicy: 'ALWAYS',
+                results          : [[path: 'API/build/allure-results'],[path: 'UI/build/allure-results']]
+            ])
+          }
+        }
     }
 }
+
+
