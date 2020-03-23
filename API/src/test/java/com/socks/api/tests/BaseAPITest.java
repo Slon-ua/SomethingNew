@@ -16,7 +16,7 @@ public class BaseAPITest {
 
         // 1)   RestAssured.baseURI = "http://192.168.99.100";
         // 2)
-        RestAssured.baseURI = System.getProperty("host","http://192.168.99.117"); // для задачи хоста вручную через консоль или автоматом второе значение
+        RestAssured.baseURI = System.getProperty("host","http://192.168.99.118"); // для задачи хоста вручную через консоль или автоматом второе значение
 
 
         // 3)  МЕТОД для которого мы создавали Интерфейс ProgectConfig, в ресорсах confir.properties  и добавляли в депенденси Гредла библиотеку JavaOWNER
