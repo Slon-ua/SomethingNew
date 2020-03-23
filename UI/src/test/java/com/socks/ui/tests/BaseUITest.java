@@ -18,8 +18,8 @@ public class BaseUITest {
 
     @BeforeAll
     static void setUp() {
-        RestAssured.baseURI = System.getProperty("host","http://192.168.99.101"); // для задачи хоста вручную через консоль или автоматом второе значение
-        Configuration.baseUrl = System.getProperty("host","http://192.168.99.117");
+        RestAssured.baseURI = System.getProperty("host","http://192.168.99.118"); // для задачи хоста вручную через консоль или автоматом второе значение
+        Configuration.baseUrl = System.getProperty("host","http://192.168.99.118");
         Configuration.browserSize = "1366x768";
         Configuration.timeout=4000;
         Configuration.browser = "chrome";
