@@ -19,7 +19,7 @@ public class BaseUITest {
     @BeforeAll
     static void setUp() {
         RestAssured.baseURI = System.getProperty("host","http://192.168.99.101"); // для задачи хоста вручную через консоль или автоматом второе значение
-        Configuration.baseUrl = System.getProperty("host","http://192.168.99.101");
+        Configuration.baseUrl = System.getProperty("host","http://192.168.99.117");
         Configuration.browserSize = "1366x768";
         Configuration.timeout=4000;
         Configuration.browser = "chrome";
@@ -40,7 +40,7 @@ public class BaseUITest {
           RestAssured.baseURI = config.host();  //вызов конкретной проперти
 */
 
-        Configuration.remote =  "http://192.168.99.109:4444/wd/hub";
+        Configuration.remote =  "http://192.168.99.120:4444/wd/hub";
 
     }
 
