@@ -19,7 +19,7 @@ node {
         sh "./gradlew  API:test"
     }
     stage("run UI test"){
-        sh "./gradlew clean UI:test"
+        sh "./gradlew  UI:test"
     }
 
 /* 
