@@ -96,7 +96,7 @@ public class TestLogin extends BaseUITest {
         //open("http://192.168.99.101/category.html");
         $("#tabCatalogue > a").click();
         $("select").click();
-        $("select").selectOptionContainingText("Name1");
+        $("select").selectOptionContainingText("Name");
 
 
         sleep(5000);
