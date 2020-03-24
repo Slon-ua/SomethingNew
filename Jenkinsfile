@@ -16,7 +16,7 @@ node {
 //#        step {
 //#            sh "./gradlew clean API:test"
 //#        }
-        sh "./gradlew clean API:test"
+        sh "./gradlew  API:test"
     }
     stage("run UI test"){
         sh "./gradlew clean UI:test"
