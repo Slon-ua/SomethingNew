@@ -25,7 +25,7 @@ node {
 
     stage("checkout repo"){
 //        steps {
-//                sh "curl -s -X POST https://api.telegram.org/bot342643054:AAEANh8JIpn1Oq4csQi9-HHnSUmy5HYFjU8/sendMessage -d chat_id=-382252210 -d 'text=Start AUTest.'"
+                sh "curl -s -X POST https://api.telegram.org/bot342643054:AAEANh8JIpn1Oq4csQi9-HHnSUmy5HYFjU8/sendMessage -d chat_id=-382252210 -d 'text=Start AUTest.'"
 //            }
         git branch: 'master',
         credentials: '',
@@ -33,22 +33,22 @@ node {
     }
     stage("build"){
 //        steps {
-//                sh "curl -s -X POST https://api.telegram.org/bot342643054:AAEANh8JIpn1Oq4csQi9-HHnSUmy5HYFjU8/sendMessage -d chat_id=-382252210 -d 'text=Build AUProject.'"
+                sh "curl -s -X POST https://api.telegram.org/bot342643054:AAEANh8JIpn1Oq4csQi9-HHnSUmy5HYFjU8/sendMessage -d chat_id=-382252210 -d 'text=Build AUProject.'"
 //            }
         sh "./gradlew clean API:assemble "
     }
     try {
         stage("run API test"){
             sh "./gradlew  API:test" 
-            steps {
+//            steps {
                 sh "curl -s -X POST https://api.telegram.org/bot342643054:AAEANh8JIpn1Oq4csQi9-HHnSUmy5HYFjU8/sendMessage -d chat_id=-382252210 -d 'text=Run API test.'"
-            }
+//            }
         }
         stage("run UI test"){
             sh "./gradlew  UI:test"
-            steps {
+//            steps {
                 sh "curl -s -X POST https://api.telegram.org/bot342643054:AAEANh8JIpn1Oq4csQi9-HHnSUmy5HYFjU8/sendMessage -d chat_id=-382252210 -d 'text=Run UI test.'"
-            }
+//            }
         }
     } catch (error) {
         currentBuild.result = 'FAILURE'
@@ -63,8 +63,8 @@ node {
                 results: [[path: 'API/build/allure-results'],[path: 'UI/build/allure-results']]
             ])
         }
-        steps {
+//        steps {
                 sh "curl -s -X POST https://api.telegram.org/bot342643054:AAEANh8JIpn1Oq4csQi9-HHnSUmy5HYFjU8/sendMessage -d chat_id=-382252210 -d 'text=Test complete.'"
-            }
+//            }
     }
 }
