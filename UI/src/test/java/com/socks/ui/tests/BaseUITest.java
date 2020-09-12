@@ -20,10 +20,14 @@ public class BaseUITest {
     static void setUp() {
         RestAssured.baseURI = System.getProperty("host","http://192.168.99.118"); // для задачи хоста вручную через консоль или автоматом второе значение
         Configuration.baseUrl = System.getProperty("host","http://192.168.99.118");
-        Configuration.browserSize = "1366x768";
+//        Configuration.browserSize = "1366x768";
+//        Configuration.browser = "chrome";
+//        Configuration.remote =  "http://192.168.99.120:4444/wd/hub";        
         Configuration.timeout=4000;
-        Configuration.browser = "chrome";
 
+        Configuration.browser = "com.socks.ui.SelenoidDriverProvider"; //для запуска VNC в selenoid
+        
+        
    //     Configuration.browser= "com.socks.pages.ui.MyCustomDriver";
    //     SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(false));
 
@@ -40,7 +44,7 @@ public class BaseUITest {
           RestAssured.baseURI = config.host();  //вызов конкретной проперти
 */
 
-        Configuration.remote =  "http://192.168.99.120:4444/wd/hub";
+//        Configuration.remote =  "http://192.168.99.120:4444/wd/hub";
 
     }
 
