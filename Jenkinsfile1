@@ -24,17 +24,17 @@ node {
     }    
 
     stage("checkout repo"){
-        steps {
-                sh "curl -s -X POST https://api.telegram.org/bot342643054:AAEANh8JIpn1Oq4csQi9-HHnSUmy5HYFjU8/sendMessage -d chat_id=-382252210 -d 'text=Start AUTest.'"
-            }
+//        steps {
+//                sh "curl -s -X POST https://api.telegram.org/bot342643054:AAEANh8JIpn1Oq4csQi9-HHnSUmy5HYFjU8/sendMessage -d chat_id=-382252210 -d 'text=Start AUTest.'"
+//            }
         git branch: 'master',
         credentials: '',
         url: 'https://github.com/Slon-ua/SomethingNew.git'
     }
     stage("build"){
-        steps {
-                sh "curl -s -X POST https://api.telegram.org/bot342643054:AAEANh8JIpn1Oq4csQi9-HHnSUmy5HYFjU8/sendMessage -d chat_id=-382252210 -d 'text=Build AUProject.'"
-            }
+//        steps {
+//                sh "curl -s -X POST https://api.telegram.org/bot342643054:AAEANh8JIpn1Oq4csQi9-HHnSUmy5HYFjU8/sendMessage -d chat_id=-382252210 -d 'text=Build AUProject.'"
+//            }
         sh "./gradlew clean API:assemble "
     }
     try {
